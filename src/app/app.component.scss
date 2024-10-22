@@ -3,19 +3,23 @@ body {
   margin: 0;
 }
 
+.backdrop {
+  margin: 200px;
+}
 #container {
   background-color: #212228;
   background-image: linear-gradient(#292a30 0.2em, transparent 0.1em),
     linear-gradient(90deg, #292a30 0.1em, transparent 0.1em);
   background-size: 4em 4em;
-  height: 100vh;
+  height: 50vh;
+  position: relative;
 }
 
-#card {
+[id^="card"] {
   width: 100px;
   height: 100px;
   background-color: #afda9f;
   border-radius: 5px;
   cursor: pointer;
-  position: fixed;
+  position: absolute;
 }

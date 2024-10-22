@@ -1,5 +1,5 @@
 <div class="backdrop">
   <div id="container">
-    <div id="card"></div>
+    <div *ngFor="let element of cards" id="card-{{element}}"></div>
   </div>
 </div>
