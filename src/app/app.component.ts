@@ -32,33 +32,45 @@ export class AppComponent implements AfterViewInit {
       }
 
       function mouseMove(e: MouseEvent) {
+        // Calculate the raw movement
         newX = startX - e.clientX;
         newY = startY - e.clientY;
 
         startX = e.clientX;
         startY = e.clientY;
 
-        card.style.top =
+        // Define grid size (adjust these values as needed)
+        const GRID_SIZE = 20; // pixels
+
+        // Calculate new position with boundaries
+        let newTop =
           Math.min(
             Math.max(0, card.offsetTop),
             card.parentElement.offsetHeight - card.offsetHeight
-          ) -
-          newY +
-          'px';
-        card.style.left =
+          ) - newY;
+
+        let newLeft =
           Math.min(
             Math.max(0, card.offsetLeft),
             card.parentElement.offsetWidth - card.offsetWidth
-          ) -
-          newX +
-          'px';
+          ) - newX;
 
-        console.log(card.offsetTop, card.offsetRight);
+        // Snap to grid by rounding to nearest grid position
+        newTop = Math.round(newTop / GRID_SIZE) * GRID_SIZE;
+        newLeft = Math.round(newLeft / GRID_SIZE) * GRID_SIZE;
+
+        // Apply the snapped position
+        card.style.top = newTop + 'px';
+        card.style.left = newLeft + 'px';
       }
 
       function mouseUp(e: MouseEvent) {
         document.removeEventListener('mousemove', mouseMove);
       }
     }
+  }
+  // Optional: Add helper function to snap a single value to grid
+  snapToGrid(value: number, gridSize: number = 20): number {
+    return Math.round(value / gridSize) * gridSize;
   }
 }
